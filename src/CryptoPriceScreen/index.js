@@ -27,7 +27,6 @@ const CryptoPriceScreen = () => {
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h&locale=en"
       );
       setCryptoData(response.data);
-      console.log("response==");
       setErrorData(false); // Clear any previous error
     } catch (error) {
       setErrorData(true);
