@@ -34,18 +34,11 @@ const DetailModal = (props) => {
                     source={{ uri: props?.modalData?.image }}
                     style={styles.icon}
                   />
-                  <Text
-                    style={[
-                      styles.blackBoldText,
-                      { alignSelf: "center", fontSize: 18 },
-                    ]}
-                  >
-                    {props.modalData.name}
-                  </Text>
+                  <Text style={styles.titleText}>{props.modalData.name}</Text>
                 </View>
                 <Text
                   style={[
-                    styles.blackBoldText,
+                    styles.grayBoldText,
                     { color: "green", fontSize: 20 },
                   ]}
                 >
@@ -55,34 +48,34 @@ const DetailModal = (props) => {
               </View>
 
               <View style={styles.itemLine}>
-                <Text style={styles.blackBoldText}>Market Rank</Text>
+                <Text style={styles.grayBoldText}>Market Rank</Text>
                 <Text style={styles.blackText}>
                   #{props.modalData.market_cap_rank}
                 </Text>
               </View>
               <View style={styles.itemLine}>
-                <Text style={styles.blackBoldText}>Circulating Supply</Text>
+                <Text style={styles.grayBoldText}>Circulating Supply</Text>
                 <Text style={styles.blackText}>
                   {formatRupees(props.modalData.circulating_supply)}{" "}
                   {props.modalData.symbol}
                 </Text>
               </View>
               <View style={styles.itemLine}>
-                <Text style={styles.blackBoldText}>Lowest Today </Text>
+                <Text style={styles.grayBoldText}>Lowest Today </Text>
                 <Text style={styles.blackText}>
                   {"\u20B9"}
                   {props.modalData.low_24h}
                 </Text>
               </View>
               <View style={styles.itemLine}>
-                <Text style={styles.blackBoldText}>Highest Today </Text>
+                <Text style={styles.grayBoldText}>Highest Today </Text>
                 <Text style={styles.blackText}>
                   {"\u20B9"}
                   {props.modalData.high_24h}
                 </Text>
               </View>
               <View style={styles.itemLine}>
-                <Text style={styles.blackBoldText}>All Time Highest </Text>
+                <Text style={styles.grayBoldText}>All Time Highest </Text>
                 <Text style={styles.blackText}>
                   {"\u20B9"}
                   {props.modalData.ath.toFixed(2)}
@@ -144,7 +137,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600",
   },
-  blackBoldText: {
+  grayBoldText: {
     color: "gray",
     fontSize: 16,
     fontWeight: "700",
@@ -152,6 +145,12 @@ const styles = StyleSheet.create({
   crossText: {
     color: "black",
     fontSize: 20,
+    fontWeight: "700",
+  },
+  titleText: {
+    alignSelf: "center",
+    fontSize: 18,
+    color: "black",
     fontWeight: "700",
   },
 });
