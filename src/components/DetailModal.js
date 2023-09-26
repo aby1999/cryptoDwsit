@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Modal from "react-native-modal";
 import formatRupees from "../utils/function";
+import Close from "../assets/png/close.png";
 
 const DetailModal = (props) => {
   console.log("props.modalData", props.modalData);
@@ -24,7 +25,7 @@ const DetailModal = (props) => {
               }}
               style={styles.cross}
             >
-              <Text style={styles.crossText}> X</Text>
+              <Image source={Close} style={styles.icon} />
             </TouchableOpacity>
             <View style={styles.details}>
               <View style={styles.itemLine}>
