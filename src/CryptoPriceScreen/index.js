@@ -17,9 +17,9 @@ import Caution from "../assets/png/caution.png";
 const CryptoPriceScreen = () => {
   const [cryptoData, setCryptoData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalData, setModalData] = useState();
+  const [modalData, setModalData] = useState(null); // Initialize as null
   const [errorData, setErrorData] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Initialize as true
 
   const fetchData = async () => {
     try {
@@ -28,11 +28,16 @@ const CryptoPriceScreen = () => {
       );
       setCryptoData(response.data);
       console.log("response==");
+      setErrorData(false); // Clear any previous error
     } catch (error) {
       setErrorData(true);
-      console.log("Error fetching data:", error);
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false); // Set loading to false when the request is complete
     }
   };
+
+  useEffect(() => {}, [cryptoData]);
 
   useEffect(() => {
     fetchData();
@@ -40,10 +45,14 @@ const CryptoPriceScreen = () => {
     const intervalId = setInterval(() => {
       fetchData();
     }, 60000); // 60 seconds in milliseconds
+
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
+  // Render conditionally based on loading and error states
+
+  // Render FlatList with fetched data
   return (
     <View style={styles.mainView}>
       {modalVisible ? (
@@ -59,10 +68,14 @@ const CryptoPriceScreen = () => {
         <Image source={Logo} style={styles.logo} />
         <Text style={styles.titleText}>Crypto</Text>
       </View>
-      {errorData ? (
+      {loading ? (
+        <View style={styles.errorView}>
+          <Text style={styles.loadingText}>Loading...</Text>
+        </View>
+      ) : errorData ? (
         <View style={styles.errorView}>
           <Image source={Caution} style={styles.cuation} />
-          <Text style={styles.errorText}>Something Went Wrong </Text>
+          <Text style={styles.errorText}>Something Went Wrong</Text>
         </View>
       ) : (
         <FlatList
@@ -200,6 +213,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   errorText: { color: "#eb4664", fontSize: 20, fontWeight: "500" },
+  loadingText: { color: "#000", fontSize: 20, fontWeight: "600" },
   cuation: { height: 200, width: 200, resizeMode: "contain" },
 });
 
