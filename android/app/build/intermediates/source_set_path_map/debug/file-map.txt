@@ -25,3 +25,4 @@ com.awesomeproject.app-mergeDebugResources-23 /Users/unthinkable-lap/Documents/c
 com.awesomeproject.app-merged_res-24 /Users/unthinkable-lap/Documents/cryptoDwsit/android/app/build/intermediates/merged_res/debug
 com.awesomeproject.app-debug-25 /Users/unthinkable-lap/Documents/cryptoDwsit/android/app/src/debug/res
 com.awesomeproject.app-main-26 /Users/unthinkable-lap/Documents/cryptoDwsit/android/app/src/main/res
+com.awesomeproject.app-packaged_res-27 /Users/unthinkable-lap/Documents/cryptoDwsit/node_modules/react-native-splash-screen/android/build/intermediates/packaged_res/debug
