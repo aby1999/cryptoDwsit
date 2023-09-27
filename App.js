@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import SplashScreen from "react-native-splash-screen";
 import {
   SafeAreaView,
   ScrollView,
@@ -7,10 +8,15 @@ import {
   Text,
   useColorScheme,
   View,
-} from 'react-native';
-import CryptoPriceScreen from './src/CryptoPriceScreen';
+} from "react-native";
+import CryptoPriceScreen from "./src/CryptoPriceScreen";
 
 function App() {
+  React.useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 20000);
+  });
   return (
     <View>
       <CryptoPriceScreen />
@@ -25,15 +31,15 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: "400",
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700",
   },
 });
 

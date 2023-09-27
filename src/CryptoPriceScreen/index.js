@@ -13,31 +13,20 @@ import downArrow from "../assets/png/downArrow.png";
 import upArrow from "../assets/png/upArrow.png";
 import Logo from "../assets/png/logo.png";
 import Caution from "../assets/png/caution.png";
+import { useApiResponse } from "../Api/services";
 
 const CryptoPriceScreen = () => {
-  const [cryptoData, setCryptoData] = useState([]);
+  // const [data, setCryptoData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState(null); // Initialize as null
-  const [errorData, setErrorData] = useState(false);
-  const [loading, setLoading] = useState(true); // Initialize as true
+  // const [error, setErrorData] = useState(false);
+  // const [loading, setLoading] = useState(true); // Initialize as true
+  const { loading, data, error, getCoinsDetails } = useApiResponse();
 
   const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h&locale=en"
-      );
-      setCryptoData(response.data);
-      setErrorData(false); // Clear any previous error
-    } catch (error) {
-      setErrorData(true);
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false); // Set loading to false when the request is complete
-    }
+    getCoinsDetails();
   };
-
-  useEffect(() => {}, [cryptoData]);
-
+  console.log("REDNER");
   useEffect(() => {
     fetchData();
 
@@ -51,7 +40,62 @@ const CryptoPriceScreen = () => {
 
   // Render conditionally based on loading and error states
 
-  // Render FlatList with fetched data
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() => {
+            setModalVisible(true);
+            setModalData(item);
+          }}
+        >
+          <View style={styles.itemView}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Image source={{ uri: item.image }} style={styles.icon} />
+              <View>
+                <Text style={styles.blackBoldText}>
+                  {item.symbol.toUpperCase()}
+                </Text>
+                <Text style={styles.grayText}>{item.name}</Text>
+              </View>
+            </View>
+            <View>
+              <Text style={[{ alignSelf: "flex-end" }, styles.grayBoldText]}>
+                {"\u20B9"}
+                {item.current_price.toFixed(2)}
+              </Text>
+              <View style={[{ alignSelf: "flex-end" }, styles.row]}>
+                <Image
+                  source={
+                    item.market_cap_change_percentage_24h > 0
+                      ? upArrow
+                      : downArrow
+                  }
+                  style={styles.image}
+                />
+                <Text
+                  style={[
+                    styles.blackText,
+                    item.market_cap_change_percentage_24h > 0
+                      ? { color: "green" }
+                      : { color: "red" },
+                  ]}
+                >
+                  {Math.abs(item.market_cap_change_percentage_24h).toFixed(2)}%
+                </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.mainView}>
       {modalVisible ? (
@@ -71,73 +115,16 @@ const CryptoPriceScreen = () => {
         <View style={styles.errorView}>
           <Text style={styles.loadingText}>Loading...</Text>
         </View>
-      ) : errorData ? (
+      ) : error ? (
         <View style={styles.errorView}>
           <Image source={Caution} style={styles.cuation} />
           <Text style={styles.errorText}>Something Went Wrong</Text>
         </View>
       ) : (
         <FlatList
-          data={cryptoData}
+          data={data}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.container}>
-              <TouchableOpacity
-                onPress={() => {
-                  setModalVisible(true);
-                  setModalData(item);
-                }}
-              >
-                <View style={styles.itemView}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Image source={{ uri: item.image }} style={styles.icon} />
-                    <View>
-                      <Text style={styles.blackBoldText}>
-                        {item.symbol.toUpperCase()}
-                      </Text>
-                      <Text style={styles.grayText}>{item.name}</Text>
-                    </View>
-                  </View>
-                  <View>
-                    <Text
-                      style={[{ alignSelf: "flex-end" }, styles.grayBoldText]}
-                    >
-                      {"\u20B9"}
-                      {item.current_price.toFixed(2)}
-                    </Text>
-                    <View style={[{ alignSelf: "flex-end" }, styles.row]}>
-                      <Image
-                        source={
-                          item.market_cap_change_percentage_24h > 0
-                            ? upArrow
-                            : downArrow
-                        }
-                        style={styles.image}
-                      />
-                      <Text
-                        style={[
-                          styles.blackText,
-                          item.market_cap_change_percentage_24h > 0
-                            ? { color: "green" }
-                            : { color: "red" },
-                        ]}
-                      >
-                        {Math.abs(
-                          item.market_cap_change_percentage_24h
-                        ).toFixed(2)}
-                        %
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            </View>
-          )}
+          renderItem={renderItem}
         />
       )}
     </View>
@@ -145,11 +132,14 @@ const CryptoPriceScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  mainView: { backgroundColor: "#eee", paddingBottom: 60 },
+  mainView: {
+    backgroundColor: "#eee",
+    paddingBottom: 60,
+  },
   itemView: {
     flexDirection: "row",
     justifyContent: "space-between",
-    // Controls shadow blur radius
+    // Controls shadow blur radius,
   },
   nameText: {},
   container: {
@@ -162,7 +152,7 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     backgroundColor: "#fff",
     marginVertical: 8,
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     borderRadius: 10,
   },
   image: { height: 20, width: 20 },

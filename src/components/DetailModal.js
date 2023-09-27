@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   innerView: {
-    backgroundColor: "white",
+    backgroundColor: "#fff",
     paddingTop: 18,
     paddingBottom: 30,
     borderTopRightRadius: 20,
