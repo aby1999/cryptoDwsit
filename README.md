@@ -1,79 +1,92 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# CryptoDSwit App README
 
-# Getting Started
+## Introduction
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Welcome to CryptoDSwit, a React Native mobile application that provides real-time cryptocurrency price information. This app is designed to help users stay up-to-date with the latest cryptocurrency prices and trends. It utilizes the CoinGecko API to fetch cryptocurrency data.
 
-## Step 1: Start the Metro Server
+## Important Note
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+This app relies on the public API 'CoinGecko,' which updates every 60 seconds. Therefore, real-time data will be reflected after 60 seconds.since this is a public API, you may notice slight differences in the prices of cryptocurrencies compared to live apps.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Features
 
-```bash
-# using npm
-npm start
+- **Real-time Crypto Prices:** View real-time prices for various cryptocurrencies.
 
-# OR using Yarn
-yarn start
-```
+- **Cryptocurrency Details:** Access detailed information about each cryptocurrency, including market cap, volume, and price charts.
 
-## Step 2: Start your Application
+- **User-Friendly Interface:** The app features an intuitive and user-friendly design for a smooth user experience.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Prerequisite
 
-### For Android
+1. Node.js
+2. Android Studio to run android app
+3. XCode to run ios app
 
-```bash
-# using npm
-npm run android
+## Getting Started
 
-# OR using Yarn
-yarn android
-```
+Follow these steps to get started with CryptoDSwit:
 
-### For iOS
+1. **Clone the Repository:**
 
-```bash
-# using npm
-npm run ios
+2. **Install Dependencies:**  
+   For Android :
+   i. Run the command: `npm install`
+   For ios:
+   i Run the command : `cd ios && pod install`
 
-# OR using Yarn
-yarn ios
-```
+3. **Set Up Environment Variables:**
+   Create a `.env` file in the project root directory and add your CoinGecko API key.
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+4. **Run the App:**
+   For Android :
+   i. Run the command: `npx react-native run-android`
+   For ios:
+   i Run the command : `npx react-native run-ios`
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+5. **Build and Deploy:**
+   Use the appropriate commands for building and deploying the app to your desired platform (iOS/Android).
 
-## Step 3: Modifying your App
+## Dependencies
 
-Now that you have successfully run the app, let's modify it.
+CryptoDSwit relies on the following major dependencies:
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+- React Native: [https://reactnative.dev/](https://reactnative.dev/)
+- CoinGecko API: [https://coingecko.com/en/api](https://coingecko.com/en/api)
+- React Navigation: [https://reactnavigation.org/](https://reactnavigation.org/)
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+For a full list of dependencies and their versions, please check the `package.json` file.
 
-## Congratulations! :tada:
+## Contributing
 
-You've successfully run and modified your React Native App. :partying_face:
+We welcome contributions from the community. If you'd like to contribute to the development of CryptoDSwit, please follow these guidelines:
 
-### Now what?
+1. Fork the repository.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+2. Create a new branch for your feature or bug fix.
 
-# Troubleshooting
+3. Make your changes and ensure that the code remains clean and well-documented.
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+4. Test your changes thoroughly.
 
-# Learn More
+5. Submit a pull request, providing a detailed description of the changes you made.
 
-To learn more about React Native, take a look at the following resources:
+## Issues and Support
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+If you encounter any issues or have questions about CryptoDSwit, please feel free to open an issue on the GitHub repository. We'll do our best to provide assistance and address problems promptly.
+
+## Acknowledgments
+
+- The CryptoDSwit team would like to express our gratitude to the CoinGecko team for providing the API that powers this application.
+
+- We also appreciate the open-source community for their contributions to the various libraries and tools used in this project.
+
+## Contacts
+
+email : `abhayagrahary@gmail.com`
+phone : `7080685108`
+
+---
+
+Thank you for using CryptoDSwit! We hope you find it helpful in tracking cryptocurrency prices. If you have any feedback or suggestions, please don't hesitate to reach out.
+
+Happy crypto tracking! 🚀📈💰
